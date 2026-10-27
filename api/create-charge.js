@@ -7,9 +7,13 @@ export default async function handler(req, res) {
     });
   }
 
-  const secretKey = process.env.PAGARME_SECRET_KEY;
+  const isPreview = process.env.VERCEL_ENV === "preview";
 
-  if (!secretKey) {
+const secretKey = isPreview
+  ? process.env.PAGARME_TEST_SECRET_KEY
+  : process.env.PAGARME_SECRET_KEY;
+
+if (!secretKey) {
     return res.status(500).json({
       error: "Configuração de pagamento ausente"
     });
