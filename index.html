@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -6,67 +7,211 @@
   <meta name="theme-color" content="#111111">
   <title>Loja do Milhão | Cobranças Pix</title>
   <style>
-    :root { color-scheme: dark; --bg:#101010; --panel:#1b1b1b; --line:#303030; --gold:#e7bd55; --muted:#b9b9b9; }
-    * { box-sizing: border-box; }
-    body { margin:0; min-height:100vh; background:linear-gradient(145deg,#111 0%,#191919 60%,#221b0b 100%); color:#f8f8f8; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
-    main { width:min(100% - 28px, 520px); margin:0 auto; padding:34px 0; }
+    :root {
+      color-scheme: dark;
+      --bg:#101010; --panel:#1b1b1b; --line:#303030;
+      --gold:#e7bd55; --muted:#b9b9b9;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0; min-height:100vh;
+      background:linear-gradient(145deg,#111,#191919 60%,#221b0b);
+      color:#f8f8f8;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+    main { width:min(100% - 28px,520px); margin:auto; padding:34px 0; }
     header { text-align:center; margin-bottom:26px; }
-    .mark { width:64px; height:64px; margin:0 auto 12px; border:1px solid #806522; border-radius:18px; display:grid; place-items:center; color:var(--gold); font-size:30px; font-weight:800; background:#211d12; }
-    h1 { margin:0; font-size:clamp(26px,7vw,34px); letter-spacing:.02em; }
-    .subtitle { margin:8px 0 0; color:var(--muted); font-size:14px; }
-    .card { background:rgba(27,27,27,.96); border:1px solid var(--line); border-radius:20px; padding:22px; box-shadow:0 18px 45px #0004; }
-    .notice { border:1px solid #5d4a1b; background:#241f12; color:#f1dfae; border-radius:12px; padding:12px 13px; font-size:13px; line-height:1.45; margin-bottom:20px; }
-    label { display:block; font-size:14px; font-weight:650; margin:17px 0 8px; }
-    input, textarea { width:100%; border:1px solid #414141; background:#111; color:#fff; border-radius:11px; padding:14px; font:inherit; outline:none; }
-    input:focus, textarea:focus { border-color:var(--gold); box-shadow:0 0 0 3px #e7bd5522; }
-    textarea { resize:vertical; min-height:84px; }
-    .hint { color:var(--muted); font-size:12px; margin-top:7px; }
-    button { width:100%; border:0; border-radius:12px; padding:15px 16px; margin-top:22px; background:var(--gold); color:#18140a; font:inherit; font-weight:800; cursor:pointer; }
-    button:focus-visible { outline:3px solid #fff; outline-offset:3px; }
-    .status { margin-top:14px; color:#f1dfae; font-size:13px; line-height:1.5; }
-    footer { text-align:center; color:#999; font-size:12px; line-height:1.5; padding:20px 8px 0; }
+    .mark {
+      width:64px;height:64px;margin:0 auto 12px;
+      border:1px solid #806522;border-radius:18px;
+      display:grid;place-items:center;color:var(--gold);
+      font-size:30px;font-weight:800;background:#211d12;
+    }
+    h1 { margin:0;font-size:clamp(26px,7vw,34px); }
+    .subtitle,.hint,footer { color:var(--muted); }
+    .subtitle { margin-top:8px;font-size:14px; }
+    .card {
+      background:rgba(27,27,27,.96);border:1px solid var(--line);
+      border-radius:20px;padding:22px;box-shadow:0 18px 45px #0004;
+    }
+    label { display:block;font-size:14px;font-weight:650;margin:17px 0 8px; }
+    input,textarea {
+      width:100%;border:1px solid #414141;background:#111;color:#fff;
+      border-radius:11px;padding:14px;font:inherit;
+    }
+    input:focus,textarea:focus { border-color:var(--gold); }
+    textarea { resize:vertical;min-height:65px; }
+    .hint { font-size:12px;margin-top:7px; }
+    button {
+      width:100%;border:0;border-radius:12px;padding:15px;
+      margin-top:22px;background:var(--gold);color:#18140a;
+      font:inherit;font-weight:800;cursor:pointer;
+    }
+    button:disabled { opacity:.6;cursor:wait; }
+    .status { margin-top:14px;font-size:13px;line-height:1.5;overflow-wrap:anywhere; }
+    .result { margin-top:18px;padding:14px;background:#111;border-radius:12px; }
+    .result img { display:block;width:220px;max-width:100%;margin:12px auto;background:white; }
+    .copy { margin-top:10px; }
+    footer { text-align:center;font-size:12px;line-height:1.5;padding:20px 8px 0; }
   </style>
 </head>
 <body>
-  <main>
-    <header>
-      <div class="mark" aria-hidden="true">₥</div>
-      <h1>LOJA DO MILHÃO</h1>
-      <p class="subtitle">Plataforma de geração de cobranças Pix</p>
-    </header>
+<main>
+  <header>
+    <div class="mark" aria-hidden="true">₥</div>
+    <h1>LOJA DO MILHÃO</h1>
+    <p class="subtitle">Plataforma de geração de cobranças Pix</p>
+  </header>
 
-    <section class="card" aria-labelledby="form-title">
-      <h2 id="form-title" style="font-size:20px;margin:0 0 16px">Nova cobrança</h2>
-      <div class="notice">
-        Esta é a versão inicial do site. A conexão com a Pagar.me ainda não foi configurada; por isso, este formulário não cria cobranças nem gera QR Codes reais.
-      </div>
+  <section class="card">
+    <h2 style="font-size:20px;margin:0 0 8px">Nova cobrança Pix</h2>
+    <p class="hint">Preencha os dados verdadeiros do comprador para solicitar a cobrança.</p>
 
-      <form id="charge-form">
-        <label for="amount">Valor da cobrança (R$)</label>
-        <input id="amount" name="amount" inputmode="decimal" autocomplete="off" value="100,00" required aria-describedby="amount-hint">
-        <div id="amount-hint" class="hint">Informe o valor em reais, por exemplo: 100,00.</div>
+    <form id="charge-form">
+      <label for="amount">Valor da cobrança (R$)</label>
+      <input id="amount" name="amount" inputmode="decimal"
+        value="100,00" required maxlength="12">
 
-        <label for="description">Descrição</label>
-        <textarea id="description" name="description" maxlength="140" placeholder="Não informada">Não informada</textarea>
+      <label for="description">Descrição</label>
+      <textarea id="description" name="description"
+        maxlength="140">Não informada</textarea>
 
-        <button type="submit">Preparar cobrança</button>
-        <div id="status" class="status" role="status" aria-live="polite"></div>
-      </form>
-    </section>
+      <label for="name">Nome completo ou razão social</label>
+      <input id="name" name="name" autocomplete="name" required maxlength="64">
 
-    <footer>
-      Loja do Milhão · Protótipo inicial<br>
-      Nenhum pagamento é processado nesta versão.
-    </footer>
-  </main>
+      <label for="email">E-mail</label>
+      <input id="email" name="email" type="email"
+        autocomplete="email" required maxlength="254">
 
-  <script>
-    const form = document.getElementById('charge-form');
-    const statusBox = document.getElementById('status');
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      statusBox.textContent = 'O formulário está pronto visualmente, mas a integração de pagamentos ainda precisa ser configurada no servidor. Nenhuma cobrança foi criada.';
-    });
-  </script>
+      <label for="document">CPF ou CNPJ</label>
+      <input id="document" name="document" inputmode="numeric"
+        autocomplete="off" required maxlength="18">
+
+      <label for="phoneAreaCode">DDD</label>
+      <input id="phoneAreaCode" name="phoneAreaCode"
+        inputmode="numeric" required maxlength="2">
+
+      <label for="phoneNumber">Telefone celular</label>
+      <input id="phoneNumber" name="phoneNumber"
+        inputmode="numeric" autocomplete="tel-national"
+        required maxlength="9">
+
+      <button id="submit-button" type="submit">Gerar cobrança Pix</button>
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+      <div id="result" class="result" hidden></div>
+    </form>
+  </section>
+
+  <footer>Loja do Milhão · Pagamentos processados pela Pagar.me quando a integração estiver aprovada e funcional.</footer>
+</main>
+
+<script>
+  const form = document.getElementById('charge-form');
+  const statusBox = document.getElementById('status');
+  const resultBox = document.getElementById('result');
+  const submitButton = document.getElementById('submit-button');
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    statusBox.textContent = '';
+    resultBox.replaceChildren();
+    resultBox.hidden = true;
+    submitButton.disabled = true;
+    submitButton.textContent = 'Solicitando cobrança...';
+
+    try {
+      const rawAmount = form.amount.value.trim().replace(/\s/g, '');
+      const normalizedAmount = rawAmount.includes(',')
+        ? rawAmount.replace(/\./g, '').replace(',', '.')
+        : rawAmount;
+
+      const amount = Number(normalizedAmount);
+
+      if (!Number.isFinite(amount) || amount < 1) {
+        throw new Error('Informe um valor válido, a partir de R$ 1,00.');
+      }
+
+      const response = await fetch('/api/create-charge', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount,
+          description: form.description.value.trim() || 'Não informada',
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          document: form.document.value,
+          phoneAreaCode: form.phoneAreaCode.value,
+          phoneNumber: form.phoneNumber.value
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Não foi possível solicitar a cobrança.');
+      }
+
+      if (!data.qr_code && !data.qr_code_url) {
+        throw new Error(
+          'A Pagar.me retornou um pedido, mas não forneceu o QR Code esperado. Confira o pedido antes de tentar novamente.'
+        );
+      }
+
+      const heading = document.createElement('h3');
+      heading.textContent = 'Cobrança Pix criada';
+      resultBox.appendChild(heading);
+
+      if (data.qr_code) {
+        const label = document.createElement('p');
+        label.textContent = 'Pix copia e cola:';
+        resultBox.appendChild(label);
+
+        const code = document.createElement('textarea');
+        code.readOnly = true;
+        code.value = data.qr_code;
+        code.setAttribute('aria-label', 'Código Pix copia e cola');
+        resultBox.appendChild(code);
+
+        const copyButton = document.createElement('button');
+        copyButton.type = 'button';
+        copyButton.className = 'copy';
+        copyButton.textContent = 'Copiar código Pix';
+        copyButton.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(code.value);
+            copyButton.textContent = 'Código copiado';
+          } catch {
+            code.focus();
+            code.select();
+            copyButton.textContent = 'Selecione e copie o código';
+          }
+        });
+        resultBox.appendChild(copyButton);
+      }
+
+      if (data.qr_code_url) {
+        const image = document.createElement('img');
+        image.alt = 'QR Code Pix';
+        image.src = data.qr_code_url;
+        resultBox.appendChild(image);
+      }
+
+      if (data.order_id) {
+        const order = document.createElement('p');
+        order.textContent = 'Pedido: ' + data.order_id;
+        resultBox.appendChild(order);
+      }
+
+      resultBox.hidden = false;
+      statusBox.textContent = 'Confira os dados da cobrança antes de efetuar o pagamento.';
+    } catch (error) {
+      statusBox.textContent = error.message ||
+        'Erro ao solicitar a cobrança. Verifique a integração.';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Gerar cobrança Pix';
+    }
+  });
+</script>
 </body>
 </html>
