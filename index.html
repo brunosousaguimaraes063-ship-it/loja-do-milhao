@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111111">
+  <title>Loja do Milhão | Cobranças Pix</title>
+  <style>
+    :root { color-scheme: dark; --bg:#101010; --panel:#1b1b1b; --line:#303030; --gold:#e7bd55; --muted:#b9b9b9; }
+    * { box-sizing: border-box; }
+    body { margin:0; min-height:100vh; background:linear-gradient(145deg,#111 0%,#191919 60%,#221b0b 100%); color:#f8f8f8; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
+    main { width:min(100% - 28px, 520px); margin:0 auto; padding:34px 0; }
+    header { text-align:center; margin-bottom:26px; }
+    .mark { width:64px; height:64px; margin:0 auto 12px; border:1px solid #806522; border-radius:18px; display:grid; place-items:center; color:var(--gold); font-size:30px; font-weight:800; background:#211d12; }
+    h1 { margin:0; font-size:clamp(26px,7vw,34px); letter-spacing:.02em; }
+    .subtitle { margin:8px 0 0; color:var(--muted); font-size:14px; }
+    .card { background:rgba(27,27,27,.96); border:1px solid var(--line); border-radius:20px; padding:22px; box-shadow:0 18px 45px #0004; }
+    .notice { border:1px solid #5d4a1b; background:#241f12; color:#f1dfae; border-radius:12px; padding:12px 13px; font-size:13px; line-height:1.45; margin-bottom:20px; }
+    label { display:block; font-size:14px; font-weight:650; margin:17px 0 8px; }
+    input, textarea { width:100%; border:1px solid #414141; background:#111; color:#fff; border-radius:11px; padding:14px; font:inherit; outline:none; }
+    input:focus, textarea:focus { border-color:var(--gold); box-shadow:0 0 0 3px #e7bd5522; }
+    textarea { resize:vertical; min-height:84px; }
+    .hint { color:var(--muted); font-size:12px; margin-top:7px; }
+    button { width:100%; border:0; border-radius:12px; padding:15px 16px; margin-top:22px; background:var(--gold); color:#18140a; font:inherit; font-weight:800; cursor:pointer; }
+    button:focus-visible { outline:3px solid #fff; outline-offset:3px; }
+    .status { margin-top:14px; color:#f1dfae; font-size:13px; line-height:1.5; }
+    footer { text-align:center; color:#999; font-size:12px; line-height:1.5; padding:20px 8px 0; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="mark" aria-hidden="true">₥</div>
+      <h1>LOJA DO MILHÃO</h1>
+      <p class="subtitle">Plataforma de geração de cobranças Pix</p>
+    </header>
+
+    <section class="card" aria-labelledby="form-title">
+      <h2 id="form-title" style="font-size:20px;margin:0 0 16px">Nova cobrança</h2>
+      <div class="notice">
+        Esta é a versão inicial do site. A conexão com a Pagar.me ainda não foi configurada; por isso, este formulário não cria cobranças nem gera QR Codes reais.
+      </div>
+
+      <form id="charge-form">
+        <label for="amount">Valor da cobrança (R$)</label>
+        <input id="amount" name="amount" inputmode="decimal" autocomplete="off" value="100,00" required aria-describedby="amount-hint">
+        <div id="amount-hint" class="hint">Informe o valor em reais, por exemplo: 100,00.</div>
+
+        <label for="description">Descrição</label>
+        <textarea id="description" name="description" maxlength="140" placeholder="Não informada">Não informada</textarea>
+
+        <button type="submit">Preparar cobrança</button>
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <footer>
+      Loja do Milhão · Protótipo inicial<br>
+      Nenhum pagamento é processado nesta versão.
+    </footer>
+  </main>
+
+  <script>
+    const form = document.getElementById('charge-form');
+    const statusBox = document.getElementById('status');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      statusBox.textContent = 'O formulário está pronto visualmente, mas a integração de pagamentos ainda precisa ser configurada no servidor. Nenhuma cobrança foi criada.';
+    });
+  </script>
+</body>
+</html>
